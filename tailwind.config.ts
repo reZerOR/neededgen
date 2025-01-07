@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        lexend: 'var(--font-lexend)'
+      },
+
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
