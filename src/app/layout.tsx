@@ -24,7 +24,7 @@ export default function RootLayout({
       <body className={`${lexend.variable} antialiased font-lexend`}>
         <ThemeProvider
           attribute={"class"}
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >
