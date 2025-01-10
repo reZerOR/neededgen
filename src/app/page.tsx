@@ -1,3 +1,4 @@
+import ClientQR from "@/components/qrCode/QrCode";
 import { SparklesText } from "@/components/ui/sparkles-text";
 import { QrCode } from "lucide-react";
 
@@ -11,7 +12,9 @@ export default function Home() {
         </div>
         <div>
           <div></div>
-          <div></div>
+          <div>
+            <ClientQR/>
+          </div>
         </div>
       </div>
     </div>
