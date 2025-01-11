@@ -13,7 +13,7 @@ export default function Home() {
         <div>
           <div></div>
           <div className="mx-auto w-full max-w-3xl flex justify-center flex-col items-center">
-            <ClientQR/>
+            <ClientQR />
           </div>
         </div>
       </div>
