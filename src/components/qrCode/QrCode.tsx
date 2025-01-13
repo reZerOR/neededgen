@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useRef, useState, ChangeEvent } from "react";
 import QRCodeStyling, { Options, FileExtension } from "qr-code-styling";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Label } from "@/components/ui/label"
 
 export default function ClientQR() {
   const [options, setOptions] = useState<Options>({
@@ -59,15 +61,15 @@ export default function ClientQR() {
     qrCode?.update(options);
   }, [qrCode, options]);
 
-  const onDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setOptions((options) => ({
-      ...options,
-      data: event.target.value,
-    }));
-  };
+  // const onDataChange = (event: ChangeEvent<HTMLInputElement>) => {
+  //   setOptions((options) => ({
+  //     ...options,
+  //     data: event.target.value,
+  //   }));
+  // };
 
-  const onExtensionChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setFileExt(event.target.value as FileExtension);
+  const onExtensionChange = (value : string) => {
+    setFileExt(value as FileExtension);
   };
 
   const onSizeChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -87,19 +89,24 @@ export default function ClientQR() {
       <h2>Client QR code styling for Next.js</h2>
       <div ref={ref} />
       <div>
-        <label>
+        {/* <label>
           QR Code Data:
           <input value={options.data} onChange={onDataChange} />
-        </label>
-        <label>
-          File Format:
-          <select onChange={onExtensionChange} value={fileExt}>
-            <option value="svg">SVG</option>
-            <option value="png">PNG</option>
-            <option value="jpeg">JPEG</option>
-            <option value="webp">WEBP</option>
-          </select>
-        </label>
+        </label> */}
+    <div className="space-y-1">
+      <Label htmlFor="file-format">File Format:</Label>
+      <Select value={fileExt} onValueChange={onExtensionChange}>
+        <SelectTrigger className="w-[180px]" id="file-format">
+          <SelectValue placeholder="Select a file format" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="svg">SVG</SelectItem>
+          <SelectItem value="png">PNG</SelectItem>
+          <SelectItem value="jpeg">JPEG</SelectItem>
+          <SelectItem value="webp">WEBP</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
         <label>
           Download Size (px):
           <input
