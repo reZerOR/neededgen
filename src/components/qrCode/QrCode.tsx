@@ -1,8 +1,15 @@
 "use client";
 import React, { useEffect, useRef, useState, ChangeEvent } from "react";
 import QRCodeStyling, { Options, FileExtension } from "qr-code-styling";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Label } from "@/components/ui/label"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { Button } from "../ui/button";
 
 export default function ClientQR() {
   const [options, setOptions] = useState<Options>({
@@ -27,18 +34,18 @@ export default function ClientQR() {
     },
     dotsOptions: {
       color: "#222222",
-      type: "rounded"
+      type: "rounded",
     },
     backgroundOptions: {
       color: "#5FD4F3",
-      round: 0.1
+      round: 0.1,
     },
     cornersSquareOptions: {
-      type: 'dot'
+      type: "dot",
     },
     cornersDotOptions: {
-      type: "dot"
-    }
+      type: "dot",
+    },
   });
 
   const [fileExt, setFileExt] = useState<FileExtension>("svg");
@@ -68,19 +75,26 @@ export default function ClientQR() {
   //   }));
   // };
 
-  const onExtensionChange = (value : string) => {
+  const onExtensionChange = (value: string) => {
     setFileExt(value as FileExtension);
   };
 
   const onSizeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const size = Math.min(2000, Math.max(100, parseInt(event.target.value, 10) || 200));
+    const size = Math.min(
+      2000,
+      Math.max(100, parseInt(event.target.value, 10) || 200)
+    );
     setDownloadSize(size);
   };
 
   const onDownloadClick = () => {
     if (!qrCode) return;
 
-    const customQRCode = new QRCodeStyling({ ...options, width: downloadSize, height: downloadSize });
+    const customQRCode = new QRCodeStyling({
+      ...options,
+      width: downloadSize,
+      height: downloadSize,
+    });
     customQRCode.download({ extension: fileExt });
   };
 
@@ -93,20 +107,20 @@ export default function ClientQR() {
           QR Code Data:
           <input value={options.data} onChange={onDataChange} />
         </label> */}
-    <div className="space-y-1">
-      <Label htmlFor="file-format">File Format:</Label>
-      <Select value={fileExt} onValueChange={onExtensionChange}>
-        <SelectTrigger className="w-[180px]" id="file-format">
-          <SelectValue placeholder="Select a file format" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="svg">SVG</SelectItem>
-          <SelectItem value="png">PNG</SelectItem>
-          <SelectItem value="jpeg">JPEG</SelectItem>
-          <SelectItem value="webp">WEBP</SelectItem>
-        </SelectContent>
-      </Select>
-    </div>
+        <div className="space-y-1">
+          <Label htmlFor="file-format">File Format:</Label>
+          <Select value={fileExt} onValueChange={onExtensionChange}>
+            <SelectTrigger className="w-[180px]" id="file-format">
+              <SelectValue placeholder="Select a file format" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="svg">SVG</SelectItem>
+              <SelectItem value="png">PNG</SelectItem>
+              <SelectItem value="jpeg">JPEG</SelectItem>
+              <SelectItem value="webp">WEBP</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
         <label>
           Download Size (px):
           <input
@@ -118,7 +132,7 @@ export default function ClientQR() {
             step={10}
           />
         </label>
-        <button onClick={onDownloadClick}>Download</button>
+        <Button onClick={onDownloadClick}>Download</Button>
       </div>
     </>
   );
