@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
+import { Download } from "lucide-react";
 
 export default function ClientQR() {
   const [options, setOptions] = useState<Options>({
@@ -132,7 +133,11 @@ export default function ClientQR() {
             step={10}
           />
         </label>
-        <Button onClick={onDownloadClick}>Download</Button>
+        <Button onClick={onDownloadClick}>
+          {" "}
+          <Download />
+          Download
+        </Button>
       </div>
     </>
   );
