@@ -63,7 +63,6 @@ export default function ClientQR() {
 
   return (
     <>
-      <h2>Client QR code styling for Next.js</h2>
       <div ref={ref} />
       <div className="space-y-2">
         <div className="space-y-1">

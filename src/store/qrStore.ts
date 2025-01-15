@@ -5,6 +5,7 @@ import { Options } from "qr-code-styling";
 // Define your state interface
 interface QRStoreState {
   options: Options;
+  value: (value: string) => void;
 }
 
 // Create a custom storage object that handles encryption/decryption
@@ -63,6 +64,14 @@ const useQRStore = create<QRStoreState>()(
         cornersDotOptions: {
           type: "dot",
         },
+      },
+      value(value) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            data: value,
+          },
+        }));
       },
     }),
     {
