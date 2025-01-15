@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState, ChangeEvent } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import QRCodeStyling, { Options, FileExtension } from "qr-code-styling";
 import {
   Select,
@@ -42,7 +42,7 @@ export default function ClientQR() {
       round: 0.1,
     },
     cornersSquareOptions: {
-      type: "dot",
+      type: "dots",
     },
     cornersDotOptions: {
       type: "dot",
@@ -80,12 +80,8 @@ export default function ClientQR() {
     setFileExt(value as FileExtension);
   };
 
-  const onSizeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const size = Math.min(
-      2000,
-      Math.max(100, parseInt(event.target.value, 10) || 200)
-    );
-    setDownloadSize(size);
+  const onSizeChange = (value: string) => {
+    setDownloadSize(parseInt(value));
   };
 
   const onDownloadClick = () => {
@@ -103,11 +99,7 @@ export default function ClientQR() {
     <>
       <h2>Client QR code styling for Next.js</h2>
       <div ref={ref} />
-      <div>
-        {/* <label>
-          QR Code Data:
-          <input value={options.data} onChange={onDataChange} />
-        </label> */}
+      <div className="space-y-2">
         <div className="space-y-1">
           <Label htmlFor="file-format">File Format:</Label>
           <Select value={fileExt} onValueChange={onExtensionChange}>
@@ -122,19 +114,22 @@ export default function ClientQR() {
             </SelectContent>
           </Select>
         </div>
-        <label>
-          Download Size (px):
-          <input
-            type="number"
-            value={downloadSize}
-            onChange={onSizeChange}
-            min={100}
-            max={2000}
-            step={10}
-          />
-        </label>
+        <div className="space-y-1">
+          <Label htmlFor="file-format">Download Size:</Label>
+          <Select value={downloadSize.toString()} onValueChange={onSizeChange}>
+            <SelectTrigger className="w-[180px]" id="size">
+              <SelectValue placeholder="Select a file format" />
+            </SelectTrigger>
+            <SelectContent>
+              {resulation.map((item) => (
+                <SelectItem key={item} value={item}>
+                  {item} px
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
         <Button onClick={onDownloadClick}>
-          {" "}
           <Download />
           Download
         </Button>
@@ -142,3 +137,16 @@ export default function ClientQR() {
     </>
   );
 }
+
+const resulation = [
+  "200",
+  "400",
+  "600",
+  "800",
+  "1000",
+  "1200",
+  "1400",
+  "1600",
+  "1800",
+  "2000",
+];
