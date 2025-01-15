@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import QRCodeStyling, { Options, FileExtension } from "qr-code-styling";
+import QRCodeStyling, { FileExtension } from "qr-code-styling";
 import {
   Select,
   SelectContent,
@@ -11,44 +11,10 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 import { Download } from "lucide-react";
+import useQRStore from "@/store/qrStore";
 
 export default function ClientQR() {
-  const [options, setOptions] = useState<Options>({
-    width: 200,
-    height: 200,
-    type: "svg",
-    data: "http://qr-code-styling.com",
-    image:
-      "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png",
-    margin: 5,
-    qrOptions: {
-      typeNumber: 0,
-      mode: "Byte",
-      errorCorrectionLevel: "Q",
-    },
-    imageOptions: {
-      hideBackgroundDots: true,
-      imageSize: 0.3,
-      margin: 5,
-      crossOrigin: "anonymous",
-      saveAsBlob: true,
-    },
-    dotsOptions: {
-      color: "#222222",
-      type: "rounded",
-    },
-    backgroundOptions: {
-      color: "#5FD4F3",
-      round: 0.1,
-    },
-    cornersSquareOptions: {
-      type: "dots",
-    },
-    cornersDotOptions: {
-      type: "dot",
-    },
-  });
-
+  const { options } = useQRStore();
   const [fileExt, setFileExt] = useState<FileExtension>("svg");
   const [qrCode, setQrCode] = useState<QRCodeStyling>();
   const [downloadSize, setDownloadSize] = useState(200); // Default size for download
