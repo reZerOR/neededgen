@@ -45,7 +45,7 @@ const useQRStore = create<QRStoreState>()(
         },
         imageOptions: {
           hideBackgroundDots: true,
-          imageSize: 0.3,
+          imageSize: 0.4,
           margin: 5,
           crossOrigin: "anonymous",
           saveAsBlob: true,

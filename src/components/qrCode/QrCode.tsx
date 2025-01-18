@@ -63,38 +63,45 @@ export default function ClientQR() {
 
   return (
     <>
-      <div ref={ref} />
+      <div>
+        <div ref={ref} />
+      </div>
       <div className="space-y-2">
-        <div className="space-y-1">
-          <Label htmlFor="file-format">File Format:</Label>
-          <Select value={fileExt} onValueChange={onExtensionChange}>
-            <SelectTrigger className="w-[180px]" id="file-format">
-              <SelectValue placeholder="Select a file format" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="svg">SVG</SelectItem>
-              <SelectItem value="png">PNG</SelectItem>
-              <SelectItem value="jpeg">JPEG</SelectItem>
-              <SelectItem value="webp">WEBP</SelectItem>
-            </SelectContent>
-          </Select>
+        <div className="flex items-center space-x-2">
+          <div className="space-y-1">
+            <Label htmlFor="file-format">Format:</Label>
+            <Select value={fileExt} onValueChange={onExtensionChange}>
+              <SelectTrigger className="w-[100px]" id="file-format">
+                <SelectValue placeholder="Select a file format" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="svg">SVG</SelectItem>
+                <SelectItem value="png">PNG</SelectItem>
+                <SelectItem value="jpeg">JPEG</SelectItem>
+                <SelectItem value="webp">WEBP</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          <div className="space-y-1">
+            <Label htmlFor="file-format">Size:</Label>
+            <Select
+              value={downloadSize.toString()}
+              onValueChange={onSizeChange}
+            >
+              <SelectTrigger className="w-[100px]" id="size">
+                <SelectValue placeholder="Select a file format" />
+              </SelectTrigger>
+              <SelectContent>
+                {resulation.map((item) => (
+                  <SelectItem key={item} value={item}>
+                    {item} px
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
-        <div className="space-y-1">
-          <Label htmlFor="file-format">Download Size:</Label>
-          <Select value={downloadSize.toString()} onValueChange={onSizeChange}>
-            <SelectTrigger className="w-[180px]" id="size">
-              <SelectValue placeholder="Select a file format" />
-            </SelectTrigger>
-            <SelectContent>
-              {resulation.map((item) => (
-                <SelectItem key={item} value={item}>
-                  {item} px
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-        <Button onClick={onDownloadClick}>
+        <Button className="w-full" onClick={onDownloadClick}>
           <Download />
           Download
         </Button>
