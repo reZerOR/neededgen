@@ -35,13 +35,6 @@ export default function ClientQR() {
     qrCode?.update(options);
   }, [qrCode, options]);
 
-  // const onDataChange = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setOptions((options) => ({
-  //     ...options,
-  //     data: event.target.value,
-  //   }));
-  // };
-
   const onExtensionChange = (value: string) => {
     setFileExt(value as FileExtension);
   };
@@ -67,28 +60,29 @@ export default function ClientQR() {
         <div ref={ref} />
       </div>
       <div className="space-y-2">
-        <div className="flex items-center space-x-2">
-          <div className="space-y-1">
+        <div className="flex items-center space-x-2 w-[200px]">
+          <div className="space-y-1 flex-1">
             <Label htmlFor="file-format">Format:</Label>
             <Select value={fileExt} onValueChange={onExtensionChange}>
-              <SelectTrigger className="w-[100px]" id="file-format">
+              <SelectTrigger id="file-format">
                 <SelectValue placeholder="Select a file format" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="svg">SVG</SelectItem>
-                <SelectItem value="png">PNG</SelectItem>
-                <SelectItem value="jpeg">JPEG</SelectItem>
-                <SelectItem value="webp">WEBP</SelectItem>
+                {formats.map((format) => (
+                  <SelectItem key={format} value={format}>
+                    {format.toUpperCase()}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
-          <div className="space-y-1">
+          <div className="space-y-1 flex-1">
             <Label htmlFor="file-format">Size:</Label>
             <Select
               value={downloadSize.toString()}
               onValueChange={onSizeChange}
             >
-              <SelectTrigger className="w-[100px]" id="size">
+              <SelectTrigger id="size">
                 <SelectValue placeholder="Select a file format" />
               </SelectTrigger>
               <SelectContent>
@@ -112,13 +106,9 @@ export default function ClientQR() {
 
 const resulation = [
   "200",
-  "400",
-  "600",
-  "800",
+  "500",
   "1000",
-  "1200",
-  "1400",
-  "1600",
-  "1800",
+  "1500",
   "2000",
 ];
+const formats = ["svg", "png", "jpeg", "webp"];
