@@ -5,14 +5,14 @@ import useQRStore from "@/store/qrStore";
 const QrUrl = () => {
   const { options, value } = useQRStore();
   return (
-    <div>
+    <form>
       <Label>Url</Label>
       <Input
         type="url"
         value={options.data}
         onChange={(e) => value(e.target.value)}
       />
-    </div>
+    </form>
   );
 };
 

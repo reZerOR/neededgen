@@ -13,16 +13,17 @@ import { Tabs, TabsContent } from "../ui/tabs";
 import useSettingsStore from "@/store/useSettings";
 import QrText from "./QrTypes/QrText";
 import QrUrl from "./QrTypes/QrUrl";
+import QrPhone from "./QrTypes/QrPhone";
 
 const QrSettings = () => {
   const { qrType, setQrType } = useSettingsStore();
   return (
     <>
-      <Tabs value={qrType}>
+      <Tabs value={qrType || "text"}>
         <div>
           <Label>QR Types</Label>
-          <Select onValueChange={setQrType}>
-            <SelectTrigger value={qrType || "text"} id="size">
+          <Select onValueChange={setQrType} value={qrType || 'text'}>
+            <SelectTrigger id="size">
               <SelectValue placeholder="Select a file format" />
             </SelectTrigger>
             <SelectContent>
@@ -43,6 +44,9 @@ const QrSettings = () => {
         <TabsContent value="url">
           <QrUrl />
         </TabsContent>
+        <TabsContent value="phone">
+          <QrPhone />
+        </TabsContent>
       </Tabs>
     </>
   );
@@ -61,7 +65,7 @@ const qrContentTypes: { value: string; icon: ReactElement }[] = [
     icon: <AtSign className="size-4" />,
   },
   {
-    value: "Phone",
+    value: "phone",
     icon: <Phone className="size-4" />,
   },
   {
