@@ -14,6 +14,7 @@ import useSettingsStore from "@/store/useSettings";
 import QrText from "./QrTypes/QrText";
 import QrUrl from "./QrTypes/QrUrl";
 import QrPhone from "./QrTypes/QrPhone";
+import QrSms from "./QrTypes/QrSms";
 
 const QrSettings = () => {
   const { qrType, setQrType } = useSettingsStore();
@@ -22,7 +23,7 @@ const QrSettings = () => {
       <Tabs value={qrType || "text"}>
         <div>
           <Label>QR Types</Label>
-          <Select onValueChange={setQrType} value={qrType || 'text'}>
+          <Select onValueChange={setQrType} value={qrType || "text"}>
             <SelectTrigger id="size">
               <SelectValue placeholder="Select a file format" />
             </SelectTrigger>
@@ -46,6 +47,9 @@ const QrSettings = () => {
         </TabsContent>
         <TabsContent value="phone">
           <QrPhone />
+        </TabsContent>
+        <TabsContent value="sms">
+          <QrSms />
         </TabsContent>
       </Tabs>
     </>
