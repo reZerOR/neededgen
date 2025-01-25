@@ -10,14 +10,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsContent } from "../ui/tabs";
-import useSettingsStore from "@/store/useSettings";
 import QrText from "./QrTypes/QrText";
 import QrUrl from "./QrTypes/QrUrl";
 import QrPhone from "./QrTypes/QrPhone";
 import QrSms from "./QrTypes/QrSms";
+import useQrSettings from "@/store/useSettings";
+import { Button } from "../ui/button";
 
 const QrSettings = () => {
-  const { qrType, setQrType } = useSettingsStore();
+  const { qrType, setQrType, generateQR } = useQrSettings();
   return (
     <>
       <Tabs value={qrType || "text"}>
@@ -52,6 +53,9 @@ const QrSettings = () => {
           <QrSms />
         </TabsContent>
       </Tabs>
+      <Button onClick={generateQR} className="w-full">
+        Generate QR Code
+      </Button>
     </>
   );
 };

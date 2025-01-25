@@ -1,13 +1,16 @@
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import useQRStore from "@/store/qrStore";
+import useQrSettings from "@/store/useSettings";
 
 const QrText = () => {
-  const { options, value } = useQRStore();
+  const { formData, updateFormData } = useQrSettings();
   return (
     <div>
       <Label>Text</Label>
-      <Textarea value={options.data} onChange={(e) => value(e.target.value)} />
+      <Textarea
+        value={formData.text}
+        onChange={(e) => updateFormData("text", e.target.value)}
+      />
     </div>
   );
 };
