@@ -9,6 +9,7 @@ const QrText = () => {
       <Label>Text</Label>
       <Textarea
         value={formData.text}
+        placeholder="Hello World"
         onChange={(e) => updateFormData("text", e.target.value)}
       />
     </div>

@@ -1,18 +1,29 @@
 import { Label } from "@/components/ui/label";
 import { PhoneInput } from "@/components/ui/phone-input";
-import useQRStore from "@/store/qrStore";
-import { isValidPhoneNumber } from "react-phone-number-input";
+import { Textarea } from "@/components/ui/textarea";
+import useQrSettings from "@/store/useSettings";
 
 const QrSms = () => {
-  const { options, value } = useQRStore();
+  const { formData, updateFormData } = useQrSettings();
   return (
-    <form>
-      <Label>Sms</Label>
-      <PhoneInput
-        value={isValidPhoneNumber(options.data!) ? options.data : ""}
-        onChange={(e) => value('sms:' + e)}
-      />
-    </form>
+    <div className="space-y-4">
+      <div>
+        <Label>Sms</Label>
+        <PhoneInput
+          placeholder="Phone number"
+          value={formData.sms.number}
+          onChange={(e) => updateFormData("sms.number", e)}
+        />
+      </div>
+      <div>
+        <Label>Message</Label>
+        <Textarea
+          placeholder="Hello World"
+          value={formData.sms.number}
+          onChange={(e) => updateFormData("sms.message", e.target.value)}
+        />
+      </div>
+    </div>
   );
 };
 

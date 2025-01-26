@@ -53,7 +53,7 @@ const QrSettings = () => {
           <QrSms />
         </TabsContent>
       </Tabs>
-      <Button onClick={generateQR} className="w-full">
+      <Button onClick={generateQR} className="w-full mt-4">
         Generate QR Code
       </Button>
     </>
