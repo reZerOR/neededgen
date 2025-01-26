@@ -16,9 +16,13 @@ import QrPhone from "./QrTypes/QrPhone";
 import QrSms from "./QrTypes/QrSms";
 import useQrSettings from "@/store/useSettings";
 import { Button } from "../ui/button";
+import QrWifi from "./QrTypes/QrWifi";
+import useQRStore from "@/store/qrStore";
 
 const QrSettings = () => {
   const { qrType, setQrType, generateQR } = useQrSettings();
+  const {options} = useQRStore()
+  console.log(options.data);
   return (
     <>
       <Tabs value={qrType || "text"}>
@@ -51,6 +55,9 @@ const QrSettings = () => {
         </TabsContent>
         <TabsContent value="sms">
           <QrSms />
+        </TabsContent>
+        <TabsContent value="wi-fi">
+          <QrWifi />
         </TabsContent>
       </Tabs>
       <Button onClick={generateQR} className="w-full mt-4">

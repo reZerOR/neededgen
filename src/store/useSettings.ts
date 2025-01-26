@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import useQRStore from "./qrStore";
 
-type QRType = "text" | "url" | "phone" | "sms" | "wifi" | "email";
+type QRType = "text" | "url" | "phone" | "sms" | "wi-fi" | "email";
 
 interface FormData {
   text: string;
@@ -15,7 +15,8 @@ interface FormData {
   wifi: {
     ssid: string;
     password: string;
-    encryption: string;
+    encryption: "WPA" | "WEP" | "nopass";
+    hidden: boolean;
   };
   email: string;
 }
@@ -38,15 +39,12 @@ const useQrSettings = create<QRStore>()(
         url: "",
         phone: "",
         sms: { number: "", message: "" },
-        wifi: { ssid: "", password: "", encryption: "WPA" },
+        wifi: { ssid: "", password: "", encryption: "WPA", hidden: false },
         email: "",
       },
       qrValue: "",
       setQrType: (type) => set({ qrType: type }),
-      updateFormData:(
-        path: string,
-        value: string
-      ) => {
+      updateFormData: (path: string, value: string) => {
         set((state) => {
           const pathParts = path.split(".") as (keyof FormData)[];
           const newFormData = { ...state.formData };
@@ -96,8 +94,12 @@ const useQrSettings = create<QRStore>()(
           case "sms":
             qrData = `SMSTO:${formData.sms.number}:${formData.sms.message}`;
             break;
-          case "wifi":
-            qrData = `WIFI:S:${formData.wifi.ssid};T:${formData.wifi.encryption};P:${formData.wifi.password};;`;
+          case "wi-fi":
+            qrData = `WIFI:S:${formData.wifi.ssid};T:${
+              formData.wifi.encryption || "WPA"
+            };P:${formData.wifi.password}${
+              formData.wifi.hidden ? ";H:true" : ""
+            };;`;
             break;
           case "email":
             qrData = `mailto:${formData.email}`;
