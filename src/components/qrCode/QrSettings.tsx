@@ -18,6 +18,7 @@ import useQrSettings from "@/store/useSettings";
 import { Button } from "../ui/button";
 import QrWifi from "./QrTypes/QrWifi";
 import useQRStore from "@/store/qrStore";
+import QrEmail from "./QrTypes/QrEmail";
 
 const QrSettings = () => {
   const { qrType, setQrType, generateQR } = useQrSettings();
@@ -58,6 +59,9 @@ const QrSettings = () => {
         </TabsContent>
         <TabsContent value="wi-fi">
           <QrWifi />
+        </TabsContent>
+        <TabsContent value="email">
+          <QrEmail />
         </TabsContent>
       </Tabs>
       <Button onClick={generateQR} className="w-full mt-4">
