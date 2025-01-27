@@ -22,7 +22,7 @@ import QrEmail from "./QrTypes/QrEmail";
 
 const QrSettings = () => {
   const { qrType, setQrType, generateQR } = useQrSettings();
-  const {options} = useQRStore()
+  const { options } = useQRStore();
   console.log(options.data);
   return (
     <>
@@ -45,24 +45,11 @@ const QrSettings = () => {
             </SelectContent>
           </Select>
         </div>
-        <TabsContent value="text">
-          <QrText />
-        </TabsContent>
-        <TabsContent value="url">
-          <QrUrl />
-        </TabsContent>
-        <TabsContent value="phone">
-          <QrPhone />
-        </TabsContent>
-        <TabsContent value="sms">
-          <QrSms />
-        </TabsContent>
-        <TabsContent value="wi-fi">
-          <QrWifi />
-        </TabsContent>
-        <TabsContent value="email">
-          <QrEmail />
-        </TabsContent>
+        {qrContentTypes.map((item) => (
+          <TabsContent key={item.value} value={item.value}>
+            {item.component}
+          </TabsContent>
+        ))}
       </Tabs>
       <Button onClick={generateQR} className="w-full mt-4">
         Generate QR Code
@@ -70,30 +57,40 @@ const QrSettings = () => {
     </>
   );
 };
-const qrContentTypes: { value: string; icon: ReactElement }[] = [
+const qrContentTypes: {
+  value: string;
+  icon: ReactElement;
+  component: ReactElement;
+}[] = [
   {
     value: "url",
     icon: <Link className="size-4" />,
+    component: <QrUrl />,
   },
   {
     value: "text",
     icon: <Text className="size-4" />,
+    component: <QrText />,
   },
   {
     value: "email",
     icon: <AtSign className="size-4" />,
+    component: <QrEmail />,
   },
   {
     value: "phone",
     icon: <Phone className="size-4" />,
+    component: <QrPhone />,
   },
   {
     value: "wi-fi",
     icon: <Wifi className="size-4" />,
+    component: <QrWifi />,
   },
   {
     value: "sms",
     icon: <MessageCircle className="size-4" />,
+    component: <QrSms />,
   },
 ];
 
