@@ -45,11 +45,34 @@ export default function ClientQR() {
 
   const onDownloadClick = () => {
     if (!qrCode) return;
+    const scaleFactor = downloadSize / options.width!;
+    console.log(scaleFactor);
+
+    const data = {
+      ...options,
+      width: downloadSize,
+      height: downloadSize,
+      imageOptions: {
+        ...options.imageOptions,
+        margin: options.margin! * scaleFactor,
+      },
+      margin: options.margin! * scaleFactor,
+    };
+    console.log(data);
 
     const customQRCode = new QRCodeStyling({
       ...options,
       width: downloadSize,
       height: downloadSize,
+      imageOptions: {
+        ...options.imageOptions,
+        margin:
+          scaleFactor === 1
+            ? options.imageOptions?.margin
+            : options.imageOptions!.margin! * scaleFactor,
+      },
+      margin:
+        scaleFactor === 1 ? options.margin : options.margin! * scaleFactor * 2,
     });
     customQRCode.download({ extension: fileExt });
   };
@@ -104,11 +127,5 @@ export default function ClientQR() {
   );
 }
 
-const resulation = [
-  "200",
-  "500",
-  "1000",
-  "1500",
-  "2000",
-];
+const resulation = ["200", "500", "1000", "1500", "2000"];
 const formats = ["svg", "png", "jpeg", "webp"];
