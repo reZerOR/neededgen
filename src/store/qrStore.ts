@@ -5,7 +5,9 @@ import { Options } from "qr-code-styling";
 // Define your state interface
 interface QRStoreState {
   options: Options;
+  defaultImage: string;
   value: (value: string) => void;
+  setImage: (image: string) => void;
 }
 
 // Create a custom storage object that handles encryption/decryption
@@ -59,17 +61,27 @@ const useQRStore = create<QRStoreState>()(
           round: 0.1,
         },
         cornersSquareOptions: {
-          type: "dots",  
+          type: "dots",
         },
         cornersDotOptions: {
           type: "dot",
         },
       },
+      defaultImage:
+        "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png",
       value(value) {
         set((state) => ({
           options: {
             ...state.options,
             data: value,
+          },
+        }));
+      },
+      setImage(image) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            image,
           },
         }));
       },

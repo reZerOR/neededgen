@@ -1,13 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Upload, X, FileText } from "lucide-react";
 import { useFileInput } from "@/hooks/use-file-input";
 import Image from "next/image";
+import useQRStore from "@/store/qrStore";
+
 
 export default function ImageUpload() {
   const [isDragging, setIsDragging] = useState(false);
+  const {setImage, defaultImage} = useQRStore()
   const [preview, setPreview] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const {
@@ -26,6 +29,11 @@ export default function ImageUpload() {
       simulateUpload(file);
     }
   }
+  useEffect(() => {
+    if(preview){
+      setImage(preview)
+    }
+  }, [preview, setImage])
 
   function simulateUpload(file: File) {
     let progress = 0;
@@ -66,6 +74,7 @@ export default function ImageUpload() {
     clearFile();
     setPreview(null);
     setUploadProgress(0);
+    setImage(defaultImage)
   }
 
   return (
@@ -80,7 +89,7 @@ export default function ImageUpload() {
           "transition-colors duration-200",
           isDragging
             ? "border-indigo-500 bg-indigo-50/50 dark:bg-indigo-500/10"
-            : "border-zinc-200 dark:border-zinc-800"
+            : "border-green-500 dark:border-green-700"
         )}
         onDragOver={(e) => {
           e.preventDefault();
@@ -120,6 +129,8 @@ export default function ImageUpload() {
                   <Image
                     src={preview}
                     alt="Preview"
+                    width={200}
+                    height={200}
                     className="w-full h-full object-cover"
                   />
                 </div>
