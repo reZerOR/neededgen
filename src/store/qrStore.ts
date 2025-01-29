@@ -59,7 +59,7 @@ const useQRStore = create<QRStoreState>()(
           round: 0.1,
         },
         cornersSquareOptions: {
-          type: "dots",
+          type: "dots",  
         },
         cornersDotOptions: {
           type: "dot",
