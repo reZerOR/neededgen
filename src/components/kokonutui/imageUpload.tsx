@@ -6,12 +6,13 @@ import { Upload, X, FileText } from "lucide-react";
 import { useFileInput } from "@/hooks/use-file-input";
 import Image from "next/image";
 import useQRStore from "@/store/qrStore";
-
+import useQrSettings from "@/store/useSettings";
 
 export default function ImageUpload() {
   const [isDragging, setIsDragging] = useState(false);
-  const {setImage, defaultImage} = useQRStore()
-  const [preview, setPreview] = useState<string | null>(null);
+  const { setImage, defaultImage } = useQRStore();
+  const { formData, updateFormData } = useQrSettings();
+  // const [preview, setPreview] = useState<string | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
   const {
     fileName,
@@ -30,10 +31,10 @@ export default function ImageUpload() {
     }
   }
   useEffect(() => {
-    if(preview){
-      setImage(preview)
+    if (formData.imageStr) {
+      setImage(formData.imageStr);
     }
-  }, [preview, setImage])
+  }, [formData.imageStr, setImage]);
 
   function simulateUpload(file: File) {
     let progress = 0;
@@ -45,7 +46,7 @@ export default function ImageUpload() {
         if (file.type.startsWith("image/")) {
           const reader = new FileReader();
           reader.onloadend = () => {
-            setPreview(reader.result as string);
+            updateFormData("imageStr", reader.result as string);
           };
           reader.readAsDataURL(file);
         }
@@ -72,9 +73,9 @@ export default function ImageUpload() {
 
   function removeFile() {
     clearFile();
-    setPreview(null);
+    updateFormData("imageStr", "");
     setUploadProgress(0);
-    setImage(defaultImage)
+    setImage(defaultImage);
   }
 
   return (
@@ -124,10 +125,10 @@ export default function ImageUpload() {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              {preview ? (
+              {formData.imageStr ? (
                 <div className="relative w-16 h-16 rounded-lg overflow-hidden">
                   <Image
-                    src={preview}
+                    src={formData.imageStr}
                     alt="Preview"
                     width={200}
                     height={200}

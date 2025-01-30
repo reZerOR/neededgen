@@ -19,6 +19,7 @@ interface FormData {
     hidden: boolean;
   };
   email: string;
+  imageStr: string | null
 }
 
 interface QRStore {
@@ -35,6 +36,7 @@ const useQrSettings = create<QRStore>()(
     (set, get) => ({
       qrType: "text",
       formData: {
+        imageStr: null,
         text: "",
         url: "",
         phone: "",
