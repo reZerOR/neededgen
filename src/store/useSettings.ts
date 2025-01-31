@@ -20,6 +20,7 @@ interface FormData {
   };
   email: string;
   imageStr: string | null
+  imageSize: number | null
 }
 
 interface QRStore {
@@ -43,6 +44,7 @@ const useQrSettings = create<QRStore>()(
         sms: { number: "", message: "" },
         wifi: { ssid: "", password: "", encryption: "WPA", hidden: false },
         email: "",
+        imageSize: null
       },
       qrValue: "",
       setQrType: (type) => set({ qrType: type }),

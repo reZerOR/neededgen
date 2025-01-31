@@ -8,6 +8,7 @@ interface QRStoreState {
   defaultImage: string;
   value: (value: string) => void;
   setImage: (image: string) => void;
+  setImageSize: (size: number) => void;
 }
 
 // Create a custom storage object that handles encryption/decryption
@@ -82,6 +83,17 @@ const useQRStore = create<QRStoreState>()(
           options: {
             ...state.options,
             image,
+          },
+        }));
+      },
+      setImageSize(size) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            imageOptions: {
+              ...state.options.imageOptions,
+              imageSize: size,
+            },
           },
         }));
       },
