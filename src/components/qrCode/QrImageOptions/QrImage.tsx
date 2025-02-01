@@ -8,7 +8,14 @@ import useQrSettings from "@/store/useSettings";
 import { useState } from "react";
 
 const QrImage = () => {
-  const { setImage, defaultImage, options, setImageSize, setImageMargin} = useQRStore();
+  const {
+    setImage,
+    defaultImage,
+    options,
+    setImageSize,
+    setImageMargin,
+    setImageDots,
+  } = useQRStore();
   const { formData } = useQrSettings();
   const [inlude, setInlude] = useState(false);
   const onChange = (checked: boolean) => {
@@ -26,10 +33,18 @@ const QrImage = () => {
         <Label>Include Image</Label>
         <Switch checked={inlude} onCheckedChange={onChange} className="" />
       </div>
+      <div className="flex justify-between items-center">
+        <Label>Hide Background dots</Label>
+        <Switch
+          checked={options.imageOptions?.hideBackgroundDots}
+          onCheckedChange={setImageDots}
+          className=""
+        />
+      </div>
       <div className="space-y-2">
         <div className="flex justify-between items-center">
           <Label>Image size</Label>
-          {(formData.imageSize || options.imageOptions?.imageSize)! * 10 }
+          {(formData.imageSize || options.imageOptions?.imageSize)! * 10}
         </div>
         <Slider
           defaultValue={[
