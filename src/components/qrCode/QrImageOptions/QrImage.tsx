@@ -8,7 +8,7 @@ import useQrSettings from "@/store/useSettings";
 import { useState } from "react";
 
 const QrImage = () => {
-  const { setImage, defaultImage, options, setImageSize } = useQRStore();
+  const { setImage, defaultImage, options, setImageSize, setImageMargin} = useQRStore();
   const { formData } = useQrSettings();
   const [inlude, setInlude] = useState(false);
   const onChange = (checked: boolean) => {
@@ -40,6 +40,23 @@ const QrImage = () => {
           step={0.1}
           onValueCommit={(value) => {
             setImageSize(value[0]);
+          }}
+        />
+      </div>
+      <div className="space-y-2">
+        <div className="flex justify-between items-center">
+          <Label>Image margin</Label>
+          {formData.imageMargin || options.imageOptions?.margin}
+        </div>
+        <Slider
+          defaultValue={[
+            formData.imageMargin! || options.imageOptions!.margin!,
+          ]}
+          min={0}
+          max={10}
+          step={1}
+          onValueCommit={(value) => {
+            setImageMargin(value[0]);
           }}
         />
       </div>

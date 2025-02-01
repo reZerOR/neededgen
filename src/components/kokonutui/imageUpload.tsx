@@ -81,7 +81,7 @@ export default function ImageUpload() {
   return (
     <div className="w-full max-w-md space-y-2">
       <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
-        Upload file
+        Upload Image
       </label>
       <div
         className={cn(
