@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import Script from "next/script";
+// import Script from "next/script";
 
 const lexend = Lexend({
   variable: "--font-lexend",
