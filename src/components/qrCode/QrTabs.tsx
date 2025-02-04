@@ -3,8 +3,9 @@ import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import QrType from "./QrTypes/QrTypes";
 import QrImage from "./QrImageOptions/QrImage";
 import { ImageIcon, QrCode, Settings } from "lucide-react";
+import QrSettings from "./QrSettings/QrSettings";
 
-const QrSettings = () => {
+const QrTabs = () => {
   return (
     <Tabs defaultValue="qrType" className="w-[400px] space-y-4">
       <TabsList className="grid w-full grid-cols-3">
@@ -18,8 +19,11 @@ const QrSettings = () => {
       <TabsContent value="imageOptions">
         <QrImage/>
       </TabsContent>
+      <TabsContent value="advanced">
+        <QrSettings/>
+      </TabsContent>
     </Tabs>
   );
 };
 
-export default QrSettings;
+export default QrTabs;

@@ -29,7 +29,11 @@ const QrImage = () => {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <Label>Include Image</Label>
-        <Switch checked={formData.imageInclude} onCheckedChange={onChange} className="" />
+        <Switch
+          checked={formData.imageInclude}
+          onCheckedChange={onChange}
+          className=""
+        />
       </div>
       <div className="flex justify-between items-center">
         <Label>Hide Background dots</Label>
@@ -45,9 +49,7 @@ const QrImage = () => {
           {options.imageOptions!.imageSize! * 10}
         </div>
         <Slider
-          defaultValue={[
-            options.imageOptions!.imageSize!,
-          ]}
+          defaultValue={[options.imageOptions!.imageSize!]}
           min={0.1}
           max={0.4}
           step={0.1}
@@ -62,9 +64,7 @@ const QrImage = () => {
           {options.imageOptions?.margin}
         </div>
         <Slider
-          defaultValue={[
-          options.imageOptions!.margin!,
-          ]}
+          defaultValue={[options.imageOptions!.margin!]}
           min={0}
           max={10}
           step={1}

@@ -11,6 +11,7 @@ interface QRStoreState {
   setImageSize: (size: number) => void;
   setImageMargin: (size: number) => void;
   setImageDots: (bool: boolean) => void;
+  setBackgroundColor: (color: string) => void;
 }
 
 // Create a custom storage object that handles encryption/decryption
@@ -117,6 +118,17 @@ const useQRStore = create<QRStoreState>()(
             imageOptions: {
               ...state.options.imageOptions,
               hideBackgroundDots: bool,
+            },
+          },
+        }));
+      },
+      setBackgroundColor(color) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            backgroundOptions: {
+              ...state.options.backgroundOptions,
+              color: color,
             },
           },
         }));
