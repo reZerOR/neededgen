@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist, createJSONStorage, StateStorage } from "zustand/middleware";
-import { Options } from "qr-code-styling";
+import { DotType, Options } from "qr-code-styling";
 
 // Define your state interface
 interface QRStoreState {
@@ -13,6 +13,8 @@ interface QRStoreState {
   setImageDots: (bool: boolean) => void;
   setBackgroundColor: (color: string) => void;
   setBgRoundness: (round: number) => void;
+  setDotColor: (color: string) => void;
+  setDotType: (type: DotType) => void;
 }
 
 // Create a custom storage object that handles encryption/decryption
@@ -141,6 +143,28 @@ const useQRStore = create<QRStoreState>()(
             backgroundOptions: {
               ...state.options.backgroundOptions,
               round: round,
+            },
+          },
+        }));
+      },
+      setDotColor(color) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            dotsOptions: {
+              ...state.options.dotsOptions,
+              color: color,
+            },
+          },
+        }));
+      },
+      setDotType(type) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            dotsOptions: {
+              ...state.options.dotsOptions,
+              type: type,
             },
           },
         }));

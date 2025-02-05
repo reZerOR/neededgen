@@ -1,10 +1,11 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import QrBgSetting from "./QrBgSetting";
+import QrDotSettings from "./QrDotSettings";
 
 const QrSettings = () => {
   return (
     <div className="space-y-4">
-      <Tabs defaultValue="qrType" className="w-[400px] space-y-4">
+      <Tabs defaultValue="background" className="w-[400px] space-y-4">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger className="gap-2" value="background">
             Background
@@ -18,6 +19,9 @@ const QrSettings = () => {
         </TabsList>
         <TabsContent value="background">
           <QrBgSetting />
+        </TabsContent>
+        <TabsContent value="dot">
+          <QrDotSettings />
         </TabsContent>
       </Tabs>
     </div>
