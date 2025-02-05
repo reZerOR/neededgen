@@ -8,17 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { dotTypes } from "@/lib/qrDot";
 import useQRStore from "@/store/qrStore";
 import { DotType } from "qr-code-styling";
 import { useEffect, useState } from "react";
-const dotTypes = [
-  { value: "dots", name: "Dots" },
-  { value: "rounded", name: "Rounded" },
-  { value: "classy", name: "Classy" },
-  { value: "classy-rounded", name: "Classy Rounded" },
-  { value: "square", name: "Square" },
-  { value: "extra-rounded", name: "Extra Rounded" },
-];
 
 const QrDotSettings = () => {
   const { options, setDotColor, setDotType } = useQRStore();

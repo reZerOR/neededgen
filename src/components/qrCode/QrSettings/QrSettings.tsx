@@ -1,6 +1,7 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import QrBgSetting from "./QrBgSetting";
 import QrDotSettings from "./QrDotSettings";
+import QrCornerSettings from "./QrCornerSettings";
 
 const QrSettings = () => {
   return (
@@ -22,6 +23,9 @@ const QrSettings = () => {
         </TabsContent>
         <TabsContent value="dot">
           <QrDotSettings />
+        </TabsContent>
+        <TabsContent value="corners">
+          <QrCornerSettings/>
         </TabsContent>
       </Tabs>
     </div>

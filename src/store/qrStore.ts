@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { persist, createJSONStorage, StateStorage } from "zustand/middleware";
-import { DotType, Options } from "qr-code-styling";
+import {
+  CornerDotType,
+  CornerSquareType,
+  DotType,
+  Options,
+} from "qr-code-styling";
 
 // Define your state interface
 interface QRStoreState {
@@ -15,6 +20,10 @@ interface QRStoreState {
   setBgRoundness: (round: number) => void;
   setDotColor: (color: string) => void;
   setDotType: (type: DotType) => void;
+  setCornerDotColor: (color: string) => void;
+  setCornerDotType: (type: CornerDotType) => void;
+  setCornerSquareColor: (color: string) => void;
+  setCornerSquareType: (type: CornerSquareType) => void;
 }
 
 // Create a custom storage object that handles encryption/decryption
@@ -68,9 +77,11 @@ const useQRStore = create<QRStoreState>()(
           round: 0.1,
         },
         cornersSquareOptions: {
+          color: "#222222",
           type: "dots",
         },
         cornersDotOptions: {
+          color: "#222222",
           type: "dot",
         },
       },
@@ -164,6 +175,50 @@ const useQRStore = create<QRStoreState>()(
             ...state.options,
             dotsOptions: {
               ...state.options.dotsOptions,
+              type: type,
+            },
+          },
+        }));
+      },
+      setCornerDotColor(color) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            cornersDotOptions: {
+              ...state.options.cornersDotOptions,
+              color: color,
+            },
+          },
+        }));
+      },
+      setCornerDotType(type) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            cornersDotOptions: {
+              ...state.options.cornersDotOptions,
+              type: type,
+            },
+          },
+        }));
+      },
+      setCornerSquareColor(color) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            cornersSquareOptions: {
+              ...state.options.cornersSquareOptions,
+              color: color,
+            },
+          },
+        }));
+      },
+      setCornerSquareType(type) {
+        set((state) => ({
+          options: {
+            ...state.options,
+            cornersSquareOptions: {
+              ...state.options.cornersSquareOptions,
               type: type,
             },
           },
