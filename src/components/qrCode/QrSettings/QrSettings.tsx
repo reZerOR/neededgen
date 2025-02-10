@@ -25,7 +25,7 @@ const QrSettings = () => {
           <QrDotSettings />
         </TabsContent>
         <TabsContent value="corners">
-          <QrCornerSettings/>
+          <QrCornerSettings />
         </TabsContent>
       </Tabs>
     </div>

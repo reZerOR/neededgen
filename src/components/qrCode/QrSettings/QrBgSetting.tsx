@@ -6,7 +6,7 @@ import useQRStore from "@/store/qrStore";
 import { useEffect, useState } from "react";
 
 const QrBgSetting = () => {
-  const { options, setBackgroundColor, setBgRoundness } = useQRStore();
+  const { options, setBackgroundColor, setBgRoundness} = useQRStore();
   const [color, setColor] = useState(options.backgroundOptions!.color);
 
   // Debounced color update

@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { persist, createJSONStorage, StateStorage } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 import {
   CornerDotType,
   CornerSquareType,
@@ -27,23 +27,6 @@ interface QRStoreState {
 }
 
 // Create a custom storage object that handles encryption/decryption
-const createEncryptedStorage = (): StateStorage => ({
-  getItem: (name: string): string | null => {
-    const str = localStorage.getItem(name);
-    if (!str) return null;
-    try {
-      return atob(str);
-    } catch {
-      return null;
-    }
-  },
-  setItem: (name: string, value: string): void => {
-    localStorage.setItem(name, btoa(value));
-  },
-  removeItem: (name: string): void => {
-    localStorage.removeItem(name);
-  },
-});
 
 const useQRStore = create<QRStoreState>()(
   persist(
@@ -55,7 +38,7 @@ const useQRStore = create<QRStoreState>()(
         data: "http://qr-code-styling.com",
         image:
           "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png",
-        margin: 5,
+        margin: 0,
         qrOptions: {
           typeNumber: 0,
           mode: "Byte",
@@ -227,7 +210,6 @@ const useQRStore = create<QRStoreState>()(
     }),
     {
       name: "qr-store",
-      storage: createJSONStorage(() => createEncryptedStorage()),
     }
   )
 );
