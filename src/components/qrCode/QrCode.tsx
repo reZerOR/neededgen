@@ -8,7 +8,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
 import { Button } from "../ui/button";
 import { Download } from "lucide-react";
 import useQRStore from "@/store/qrStore";
@@ -16,8 +15,7 @@ import useQRStore from "@/store/qrStore";
 export default function ClientQR() {
   const { options } = useQRStore();
   const [fileExt, setFileExt] = useState<FileExtension>("svg");
-  const [qrCode, setQrCode] = useState<QRCodeStyling>();
-  const [downloadSize, setDownloadSize] = useState(200); // Default size for download
+  const [qrCode, setQrCode] = useState<QRCodeStyling>(); // Default size for download
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,42 +37,9 @@ export default function ClientQR() {
     setFileExt(value as FileExtension);
   };
 
-  const onSizeChange = (value: string) => {
-    setDownloadSize(parseInt(value));
-  };
-
   const onDownloadClick = () => {
     if (!qrCode) return;
-    const scaleFactor = downloadSize / options.width!;
-    console.log(scaleFactor);
-
-    const data = {
-      ...options,
-      width: downloadSize,
-      height: downloadSize,
-      imageOptions: {
-        ...options.imageOptions,
-        margin: options.margin! * scaleFactor,
-      },
-      margin: options.margin! * scaleFactor,
-    };
-    console.log(data);
-
-    const customQRCode = new QRCodeStyling({
-      ...options,
-      width: downloadSize,
-      height: downloadSize,
-      imageOptions: {
-        ...options.imageOptions,
-        margin:
-          scaleFactor === 1
-            ? options.imageOptions?.margin
-            : options.imageOptions!.margin! * scaleFactor,
-      },
-      margin:
-        scaleFactor === 1 ? options.margin : options.margin! * scaleFactor * 2,
-    });
-    customQRCode.download({ extension: fileExt });
+    qrCode.download({ extension: fileExt });
   };
 
   return (
@@ -82,41 +47,20 @@ export default function ClientQR() {
       <div>
         <div ref={ref} />
       </div>
-      <div className="space-y-2">
+      <div className="space-y-2 mt-2">
         <div className="flex items-center space-x-2 w-[200px]">
-          <div className="space-y-1 flex-1">
-            <Label htmlFor="file-format">Format:</Label>
-            <Select value={fileExt} onValueChange={onExtensionChange}>
-              <SelectTrigger id="file-format">
-                <SelectValue placeholder="Select a file format" />
-              </SelectTrigger>
-              <SelectContent>
-                {formats.map((format) => (
-                  <SelectItem key={format} value={format}>
-                    {format.toUpperCase()}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="space-y-1 flex-1">
-            <Label htmlFor="file-format">Size:</Label>
-            <Select
-              value={downloadSize.toString()}
-              onValueChange={onSizeChange}
-            >
-              <SelectTrigger id="size">
-                <SelectValue placeholder="Select a file format" />
-              </SelectTrigger>
-              <SelectContent>
-                {resulation.map((item) => (
-                  <SelectItem key={item} value={item}>
-                    {item} px
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
+          <Select value={fileExt} onValueChange={onExtensionChange}>
+            <SelectTrigger className="w-full" id="file-format">
+              <SelectValue placeholder="Select a file format" />
+            </SelectTrigger>
+            <SelectContent>
+              {formats.map((format) => (
+                <SelectItem key={format} value={format}>
+                  {format.toUpperCase()}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
         <Button className="w-full" onClick={onDownloadClick}>
           <Download />
@@ -126,6 +70,4 @@ export default function ClientQR() {
     </>
   );
 }
-
-const resulation = ["200", "500", "1000", "1500", "2000"];
 const formats = ["svg", "png", "jpeg", "webp"];
