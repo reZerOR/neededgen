@@ -30,7 +30,7 @@ interface QRStoreState {
 
 const useQRStore = create<QRStoreState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       options: {
         width: 200,
         height: 200,
