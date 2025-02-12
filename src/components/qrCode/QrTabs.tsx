@@ -7,7 +7,7 @@ import QrSettings from "./QrSettings/QrSettings";
 
 const QrTabs = () => {
   return (
-    <Tabs defaultValue="qrType" className="w-[400px] space-y-4">
+    <Tabs defaultValue="qrType" className="max:w-[400px] space-y-4">
       <TabsList className="grid w-full h-10 grid-cols-3">
         <TabsTrigger className="gap-2" value="qrType"><QrCode/>Types</TabsTrigger>
         <TabsTrigger className="gap-2" value="imageOptions"><ImageIcon/>Options</TabsTrigger>

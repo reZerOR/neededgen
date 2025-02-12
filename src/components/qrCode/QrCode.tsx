@@ -43,7 +43,7 @@ export default function ClientQR() {
   };
 
   return (
-    <>
+    <div className="">
       <div>
         <div ref={ref} />
       </div>
@@ -67,7 +67,7 @@ export default function ClientQR() {
           Download
         </Button>
       </div>
-    </>
+    </div>
   );
 }
 const formats = ["svg", "png", "jpeg", "webp"];

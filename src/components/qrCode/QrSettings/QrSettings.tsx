@@ -6,7 +6,7 @@ import QrCornerSettings from "./QrCornerSettings";
 const QrSettings = () => {
   return (
     <div className="space-y-4">
-      <Tabs defaultValue="background" className="w-[400px] space-y-4">
+      <Tabs defaultValue="background" className="max:w-[400px] space-y-4">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger className="gap-2" value="background">
             Background
