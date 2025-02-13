@@ -38,7 +38,7 @@ const useQRStore = create<QRStoreState>()(
         data: "http://qr-code-styling.com",
         image:
           "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png",
-        margin: 0,
+        margin: 5,
         qrOptions: {
           typeNumber: 0,
           mode: "Byte",
