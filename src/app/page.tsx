@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <div>
-        <div className="flex flex-col justify-center items-center gap-4 my-20">
+        <div className="flex flex-col justify-center items-center gap-4 my-5 md:my-20">
           <QrCode size={56} className="text-green-500" />
           <SparklesText text="Generate QRs" className="text-center overflow-clip" />
         </div>

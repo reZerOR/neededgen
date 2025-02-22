@@ -25,12 +25,12 @@ export const metadata: Metadata = {
     title: "QR Code Generator & Editor | Customizable QR Codes Online",
     description:
       "Generate and customize QR codes with advanced features. Change colors, styles, and formats effortlessly.",
-    url: "https://yourwebsite.com",
+    url: "https://neededgen.vercel.app/",
     siteName: "QR Code Generator",
     type: "website",
     images: [
       {
-        url: "https://yourwebsite.com/og-image.jpg", // Update with your actual image
+        url: "https://neededgen.vercel.app/qrphoto.png", // Update with your actual image
         width: 1200,
         height: 630,
         alt: "QR Code Generator Preview",
@@ -43,14 +43,14 @@ export const metadata: Metadata = {
     title: "QR Code Generator & Editor | Customizable QR Codes Online",
     description:
       "Generate and customize QR codes with advanced features. Change colors, styles, and formats effortlessly.",
-    images: ["https://yourwebsite.com/twitter-image.jpg"], // Update with your actual image
+    images: ["https://neededgen.vercel.app/qrphoto.png"], // Update with your actual image
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: "https://yourwebsite.com",
+    canonical: "https://neededgen.vercel.app/",
   },
 };
 
@@ -61,11 +61,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* <Script
-        strategy="afterInteractive"
-        crossOrigin="anonymous"
-        src="//unpkg.com/react-scan/dist/auto.global.js"
-      /> */}
+      <script
+        defer
+        src="https://cloud.umami.is/script.js"
+        data-website-id="df954562-1963-4f3d-998f-7b544acfca4f"
+      ></script>
       <body className={`${lexend.variable} antialiased font-lexend`}>
         <ThemeProvider
           attribute={"class"}
