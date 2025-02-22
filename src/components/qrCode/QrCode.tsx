@@ -62,7 +62,11 @@ export default function ClientQR() {
             </SelectContent>
           </Select>
         </div>
-        <Button className="w-full" onClick={onDownloadClick}>
+        <Button
+          className="w-full"
+          onClick={onDownloadClick}
+          data-umami-event="Download QR Code"
+        >
           <Download />
           Download
         </Button>

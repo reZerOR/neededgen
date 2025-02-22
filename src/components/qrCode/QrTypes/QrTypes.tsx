@@ -50,7 +50,11 @@ const QrType = () => {
           </TabsContent>
         ))}
       </Tabs>
-      <Button onClick={generateQR} className="w-full mt-4">
+      <Button
+        onClick={generateQR}
+        className="w-full mt-4"
+        data-umami-event="Generate QR Code"
+      >
         Generate QR Code
       </Button>
     </>
