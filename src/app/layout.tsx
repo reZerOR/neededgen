@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import Script from "next/script";
 // import Script from "next/script";
 
 const lexend = Lexend({
@@ -61,11 +62,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <script
+      <Script
         defer
         src="https://cloud.umami.is/script.js"
         data-website-id="df954562-1963-4f3d-998f-7b544acfca4f"
-      ></script>
+      ></Script>
       <body className={`${lexend.variable} antialiased font-lexend`}>
         <ThemeProvider
           attribute={"class"}
